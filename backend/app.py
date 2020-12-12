@@ -1,3 +1,7 @@
-import flask
+from flask import Flask
 
-return "lo cc";
+
+app = Flask(__name__)
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'

@@ -1,15 +1,21 @@
 # Use the official image as a parent image.
-FROM python:3.6-slim
+FROM python:3.5.2
 
+RUN apt-get update
+RUN apt-get install -y libpq-dev python3-dev build-essential postgresql-server-dev-all
 # Set the working directory.
 WORKDIR /app
 
-#Copy the current directory contents into the container at /app
-ADD . /app
+COPY requirements.txt /app
 
 # Run the command inside your image filesystem.
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
-# RUN apt-get install -y libpq-dev python3-dev build-essential postgresql-server-dev-all
+
+#Copy the current directory contents into the container at /app
+
+COPY . /app
+
+
 
 # Add metadata to the image to describe which port the container is listening on at runtime.
 EXPOSE 8080

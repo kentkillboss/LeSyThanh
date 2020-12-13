@@ -7,11 +7,11 @@ app = Flask(__name__)
 
 dp_ip = os.getenv("db_ip")
 ConnectionData = {}
-ConectionData['user' = 'postgres']
-ConectionData['password' = 'password']
+ConnectionData['user' = 'postgres']
+ConnectionData['password' = 'postgres']
 ConnectionData['host'] = str(db_ip)
 ConnectionData['port'] = '5432'
-ConnectionData['database'] = 'teamhhl'
+ConnectionData['database'] = 'northwind'
 
 @app.route("/")
 def hello():

@@ -11,13 +11,13 @@ class Customer:
                                 port = self.ConnectionData['port'],
                                 database = self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "INSERT INTO Customers(CustomerName,ContactName,Address,City,PostalCode,Country)
+            sql = "INSERT INTO TblCustomers(CustomerName,ContactName,Address,City,PostalCode,Country)
                     VALUES (%s,%s,%s,%s,%s,%s)"
             record_to_insert = (customer.CustomerName,customer.ContactName,customer.Address,customer.City,customer.PostalCode,customer.Country)
             cur.execute(sql, record_to_insert)
             con.commit()
             con.close()
-            return 'Insert Customers successfully'
+            return 'Insert TblCustomers successfully'
         except (Exception, psycopg2.DatabaseError) as error:
             return: str(error)
         finally:

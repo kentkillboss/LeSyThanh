@@ -1,24 +1,20 @@
-# Use the official image as a parent image.
-FROM python:3.5.2
+# Use an official Python runtime as a parent image
+FROM python:3.6.9
 
 RUN apt-get update
 RUN apt-get install -y libpq-dev python3-dev build-essential postgresql-server-dev-all
-# Set the working directory.
+
+# Set the working directory to /app
 WORKDIR /app
 
 COPY requirements.txt /app
-
-# Run the command inside your image filesystem.
+# Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
-
-#Copy the current directory contents into the container at /app
-
+# Copy the current directory contents into the container
 COPY . /app
 
-
-
-# Add metadata to the image to describe which port the container is listening on at runtime.
+#Make port available to the world outside this container 
 EXPOSE 8080
 
-# Run the specified command within the container.
-CMD [ "python", "app.py" ]
+# Run app.py when the container launches
+CMD ["python","app.py"]

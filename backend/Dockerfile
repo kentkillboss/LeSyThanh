@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.6.9
+FROM python:3.6-slim
 
 RUN apt-get update
 RUN apt-get install -y libpq-dev python3-dev build-essential postgresql-server-dev-all
@@ -8,13 +8,16 @@ RUN apt-get install -y libpq-dev python3-dev build-essential postgresql-server-d
 WORKDIR /app
 
 COPY requirements.txt /app
+
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
-# Copy the current directory contents into the container
+
+# Copy the current directory contents into the container at /app
 COPY . /app
 
-#Make port available to the world outside this container 
+# Make port 8080 available to the world outside this container
 EXPOSE 8080
 
+
 # Run app.py when the container launches
-CMD ["python","app.py"]
+CMD ["python", "app.py"]

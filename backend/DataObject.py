@@ -18,7 +18,7 @@ class Customer:
             con.close()
             return 'Insert TblCustomers successfully'
         except (Exception, psycopg2.DatabaseError) as error:
-            return: str(error)
+            return str(error)
         finally:
             if con is not None:
                 con.close()

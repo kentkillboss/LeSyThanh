@@ -34,7 +34,7 @@ class Customer:
                                 database = self.ConnectionData['database'])
             cur = con.cursor()
             sql = "SELECT * FROM TblCustomers"
-            cur.execute(sql, record_to_insert)
+            cur.execute(sql)
             con.commit()           
             rows = cur.fetchall()
             result = []

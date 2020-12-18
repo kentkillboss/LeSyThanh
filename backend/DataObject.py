@@ -36,14 +36,14 @@ class Customer:
             sql = "SELECT * FROM TblCustomers"
             record_to_insert = (customer.CustomerName,customer.ContactName,customer.Address,customer.City,customer.PostalCode,customer.Country)
             cur.execute(sql, record_to_insert)
-            con.commit()
-            con.close()
+            con.commit()           
             rows = cur.fetchall()
             result = []
             for row in rows:
                 c = CustomerEntity
                 c = fetch_data(row)
                 result.append(c.to_json())
+            con.close()
             return result
         except (Exception, psycopg2.DatabaseError) as error:
             return str(error)

@@ -46,13 +46,20 @@ def get_all_user():
     result = do.Customer(ConnectionData).get_all()
     return jsonify(result), 200
 
-@app.route('/user/get/<int:user_id>')
-def get_user_by_id(user_id):
-    c = bo.Customer(CustomerID=user_id)
+@app.route('/user/get/<int:customer_id>')
+def get_user_by_id(customer_id):
+    c = bo.Customer(CustomerID=customer_id)
     result = do.Customer(ConnectionData).get_by_id(c)
     if result[1] != 200:
         return jsonify({'message':result[0]}), result[1]
     return jsonify(result[0].to_json()), 200
 
+@app.route('/user/update/<int:customer_id>',methods=['PUT'])
+def update_user_by_id(customer_id):
+    data = request.json
+    c = bo.Customer(CustomerID = customer_id, CustomerName=data['CustomerName'], ContactName=data['ContactName'],Address=data['Address'], City=data['City'], PostalCode=data['PostalCode'], Country=data['Country'])
+    result = do.Customer(ConnectionData).update(c)
+    return jsonify({'message':result[0]}),result[1]
+    
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8080)

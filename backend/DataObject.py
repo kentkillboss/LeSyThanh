@@ -98,5 +98,28 @@ class Customer:
         finally:
             if con is not None:
                 con.close()
+
+    def delete(self, customer: CustomerEntity):
+        con = None
+        try:
+            con = psycopg2.connect(user = self.ConnectionData['user'],
+                                password = self.ConnectionData['password'],
+                                host = self.ConnectionData['host'],
+                                port = self.ConnectionData['port'],
+                                database = self.ConnectionData['database'])
+            cur = con.cursor()
+            sql = "DELETE FROM TblCustomers WHERE customerid=%s"
+            cur.execute(sql,(customer.CustomerID,))
+            con.commit()           
+            row = cur.rowcount
+            if row>0:
+                return "Delete Customer", 200
+            con.close()
+            return "Customer ID not found", 404
+        except (Exception, psycopg2.DatabaseError) as error:
+            return str(error)
+        finally:
+            if con is not None:
+                con.close()
 if __name__ == "__main__":
     print('this is data object package')

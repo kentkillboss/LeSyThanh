@@ -40,7 +40,7 @@ class Customer:
             result = []
             for row in rows:
                 c = CustomerEntity()
-                c = fetch_data(row)
+                c.fetch_data(row)
                 result.append(c.to_json())
             con.close()
             return result

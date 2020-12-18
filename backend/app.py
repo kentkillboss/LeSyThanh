@@ -46,5 +46,13 @@ def get_all_user():
     result = do.Customer(ConnectionData).get_all()
     return jsonify(result), 200
 
+@app.route('/user/get/<int:user_id>')
+def get_user_by_id(user_id):
+    c = bo.Customer(CustomerID=user_id)
+    result = do.Customer(ConnectionData).get_by_id(c)
+    if result[1] != 200:
+        return jsonify({'message':result[0]}), result[1]
+    return jsonify(result[0].to_json()), 200
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8080)

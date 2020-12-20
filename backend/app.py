@@ -18,8 +18,8 @@ def hello():
    return "hello"
 @app.route("/test_insert")
 def test_insert():
-    c2 = do.Customer(ConnectionData)
-    c1 = bo.Customer(1,'DAU xanh','Peter','566 Nui Thanh', 'Da Nang','5000','VietNam')
+    c2 = do.Employee(ConnectionData)
+    c1 = bo.Employee(1,'Thanh','Le','1999', 'Da Nang','VietNam')
     s1 = c2.insert(c1)
     return s1
 
@@ -95,7 +95,7 @@ def handle_employee(employee_id):
     elif request.method == 'PUT':
         # Update 
         data = request.json
-        c = bo.Employee(EmployeeID=employee_id, LastName=data['last_name'], FirstName=data['first_name'], Birthdate=data['birth_date'], Photo=data['photo'], Notes=data['notes'])
+        c = bo.Employee(EmployeeID=employee_id, LastName=data['LastName'], FirstName=data['FirstName'], Birthdate=data['Birthdate'], Photo=data['Photo'], Notes=data['Notes'])
         result = do.Employee(ConnectionData).update(c)
         return jsonify({'message': result[0]}), result[1]
     elif request.method == 'DELETE':

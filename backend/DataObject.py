@@ -1,6 +1,7 @@
 import psycopg2
 from BusinessObject import Customer as CustomerEntity
 from BusinessObject import Employee as EmployeeEntity
+from BusinessObject import Supplier as SupplierEntity
 class Customer:
     def __init__(self,ConnectionData):
         self.ConnectionData = ConnectionData

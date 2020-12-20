@@ -104,6 +104,42 @@ def handle_employee(employee_id):
         result = do.Employee(ConnectionData).delete(c)
         return jsonify({'message': result[0]}), result[1]
 
+#Supplier
+@app.route('/supplier/insert', methods=['POST'])
+def supplier_insert():
+    data = request.json
+    c1 = bo.Supplier(SupplierName=data['SupplierName'], ContactName=data['ContactName'], Address=data['Address'], City=data['City'], PostalCode=data['PostalCode'], Country=data['Country'], Phone=data['Phone'])
+    c2 = do.Supplier(ConnectionData)
+    s1 = c2.insert(c1)
+    result = {}
+    result['message'] = s1
+    return jsonify(result), 200
+
+@app.route('/supplier/all')
+def get_all_supplier():
+    result = do.Supplier(ConnectionData).get_all()
+    return jsonify(result), 200
+
+@app.route('/supplier/get/<int:supplier_id>')
+def get_supplier_by_id(supplier_id):
+    c = bo.Supplier(SupplierID=supplier_id)
+    result = do.Supplier(ConnectionData).get_by_id(c)
+    if result[1] != 200:
+        return jsonify({'message': result[0]}), result[1]
+    return jsonify(result[0].to_json()), 200
+
+@app.route('/supplier/update/<int:supplier_id>', methods=['PUT'])
+def update_supplier_by_id(supplier_id):
+    data = request.json
+    c = bo.Supplier(SupplierID=supplier_id, SupplierName=data['SupplierName'], ContactName=data['ContactName'], Address=data['Address'], City=data['City'], PostalCode=data['PostalCode'], Country=data['Country'], Phone=data['Phone'])
+    result = do.Supplier(ConnectionData).update(c)
+    return jsonify({'message': result[0]}), result[1]
+
+@app.route('/supplier/delete/<int:supplier_id>', methods=['DELETE'])
+def delete_supplier_by_id(supplier_id):
+    c = bo.Supplier(SupplierID=supplier_id)
+    result = do.Supplier(ConnectionData).delete(c)
+    return jsonify({'message': result[0]}), result[1]
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8080)

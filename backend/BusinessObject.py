@@ -56,7 +56,6 @@ class Employee:
         }
 
 class Supplier:
-    # Default attributes value are None
     def __init__(self, SupplierID=None, SupplierName=None, ContactName=None, Address=None, City=None, PostalCode=None, Country=None, Phone=None):
         self.SupplierID = SupplierID
         self.SupplierName = SupplierName
@@ -90,35 +89,35 @@ class Supplier:
         }
 
 class Category:
-    def __init__(self, category_id=None, category_name=None, description=None):
-        self.category_id = category_id
-        self.category_name = category_name
-        self.description = description
+    def __init__(self, CategoryID=None, CategoryName=None, Description=None):
+        self.CategoryID = CategoryID
+        self.CategoryName = CategoryName
+        self.Description = Description
 
     def fetch_data(self, data):
-        self.category_id = data[0]
-        self.category_name = data[1]
-        self.description = data[2]
+        self.CategoryID = data[0]
+        self.CategoryName = data[1]
+        self.Description = data[2]
 
     def to_json(self):
         return {
-            'category_id': self.category_id,
-            'category_name': self.category_name,
-            'description': self.description
+            'CategoryID': self.CategoryID,
+            'CategoryName': self.CategoryName,
+            'Description': self.Description
         }
 
-        class Order:
-    def __init__(self, order_id=None, customer_id=None, employee_id=None, order_date=None, shipper_id=None, details=[]):
-        self.order_id = order_id
-        self.customer_id = customer_id
-        self.employee_id = employee_id
-        self.order_date = order_date
-        self.shipper_id = shipper_id
-        self.details = details
+class Order:
+    def __init__(self, OrderID=None, CustomerID=None, EmployeeID=None, OrderDate=None, ShipperID=None, Details=[]):
+        self.OrderID = OrderID
+        self.CustomerID = CustomerID
+        self.EmployeeID = EmployeeID
+        self.OrderDate = OrderDate
+        self.ShipperID = ShipperID
+        self.Details = Details
 
     def fetch_data(self, data):
-        self.order_id = data[0]
-        self.order_date = data[3]
+        self.OrderID = data[0]
+        self.OrderDate = data[3]
         self.customer = Customer()
         self.customer.fetch_data(data[5:12])
         self.employee = Employee()
@@ -128,33 +127,33 @@ class Category:
 
     def to_json(self):
         return {
-            'order_id': self.order_id,
-            'order_date': self.order_date,
+            'OrderID': self.OrderID,
+            'OrderDate': self.OrderDate,
             'customer': self.customer.to_json(),
             'employee': self.employee.to_json(),
             'shipper': self.shipper.to_json(),
-            'details': self.details
+            'Details': self.Details
         }
 
 class OrderDetail:
-    def __init__(self, order_detail_id=None, order_id=None, product_id=None, quantity=None):
-        self.order_detail_id = order_detail_id
-        self.order_id = order_id
-        self.product_id = product_id
-        self.quantity = quantity
+    def __init__(self, OrderDetailId=None, OrderID=None, ProductId=None, Quantity=None):
+        self.OrderDetailId = OrderDetailId
+        self.OrderID = OrderID
+        self.ProductId = ProductId
+        self.Quantity = Quantity
 
     def fetch_data(self, data):
-        self.order_detail_id = data[0]
-        self.order_id = data[1]
-        self.product_id = data[2]
-        self.quantity = data[3]
+        self.OrderDetailId = data[0]
+        self.OrderID = data[1]
+        self.ProductId = data[2]
+        self.Quantity = data[3]
 
     def to_json(self):
         return {
-            'order_detail_id': self.order_detail_id,
-            'order_id': self.order_id,
-            'product_id': self.product_id,
-            'quantity': self.quantity
+            'OrderDetailId': self.OrderDetailId,
+            'OrderID': self.OrderID,
+            'ProductId': self.ProductId,
+            'Quantity': self.Quantity
         }
 
 if __name__ == "__main__":

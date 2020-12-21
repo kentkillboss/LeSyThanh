@@ -479,7 +479,7 @@ class Category:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "DELETE FROM tblcategories WHERE categoryid=%s"
-            cur.execute(sql, (category.category_id, ))
+            cur.execute(sql, (category.CategoryID, ))
             con.commit()
             row = cur.rowcount
             if row > 0:
@@ -505,7 +505,7 @@ class Order:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "INSERT INTO tblorders(customerid, employeeid, orderdate, shipperid) VALUES (%s, %s, %s, %s)"
-            record_to_insert = (order.customer_id, order.employee_id, order.order_date, order.shipper_id)
+            record_to_insert = (order.CustomerID, order.EmployeeID, order.OrderDate, order.ShipperID)
             cur.execute(sql, record_to_insert)
             con.commit()
             con.close()
@@ -554,7 +554,7 @@ class Order:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "select * from tblorders ord join tblcustomers cus on ord.customerid=cus.customerid join tblemployees emp on ord.employeeid=emp.employeeid join tblshippers ship on ord.shipperid=ship.shipperid where orderid=%s"
-            cur.execute(sql, (order.order_id, ))
+            cur.execute(sql, (order.OrderID, ))
             con.commit()
             row = cur.fetchone()
             order_detail = OrderDetail(self.ConnectionData)
@@ -582,7 +582,7 @@ class Order:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "UPDATE tblorders SET customerid=%s, employeeid=%s, orderdate=%s, shipperid=%s WHERE orderid=%s"
-            cur.execute(sql, (order.customer_id, order.employee_id, order.order_date, order.shipper_id, order.order_id))
+            cur.execute(sql, (order.CustomerID, order.EmployeeID, order.OrderDate, order.ShipperID, order.OrderID))
             con.commit()
             row = cur.rowcount
             if row > 0:
@@ -605,7 +605,7 @@ class Order:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "DELETE FROM tblorders WHERE orderid=%s"
-            cur.execute(sql, (order.order_id, ))
+            cur.execute(sql, (order.OrderID, ))
             con.commit()
             row = cur.rowcount
             if row > 0:
@@ -632,7 +632,7 @@ class OrderDetail:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "INSERT INTO tblorderdetails(orderid, productid, quantity) VALUES (%s, %s, %s)"
-            record_to_insert = (order_detail.order_id, order_detail.product_id, order_detail.quantity)
+            record_to_insert = (order_detail.OrderID, order_detail.ProductId, order_detail.Quantity)
             cur.execute(sql, record_to_insert)
             con.commit()
             con.close()
@@ -679,7 +679,7 @@ class OrderDetail:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "select * from tblorderdetails where orderdetailid=%s"
-            cur.execute(sql, (order_detail.order_detail_id, ))
+            cur.execute(sql, (order_detail.OrderDetailId, ))
             con.commit()
             row = cur.fetchone()
             if row:
@@ -705,7 +705,7 @@ class OrderDetail:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "select * from tblorderdetails where orderid=%s"
-            cur.execute(sql, (order.order_id, ))
+            cur.execute(sql, (order.OrderID, ))
             con.commit()
             rows = cur.fetchall()
             result = []
@@ -732,7 +732,7 @@ class OrderDetail:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "UPDATE tblorderdetails SET orderid=%s, productid=%s, quantity=%s WHERE orderdetailid=%s"
-            cur.execute(sql, (order_detail.order_id, order_detail.product_id, order_detail.quantity, order_detail.order_detail_id))
+            cur.execute(sql, (order_detail.OrderID, order_detail.ProductId, order_detail.Quantity, order_detail.OrderDetailId))
             con.commit()
             row = cur.rowcount
             if row > 0:
@@ -755,7 +755,7 @@ class OrderDetail:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "DELETE FROM tblorderdetails WHERE orderdetailid=%s"
-            cur.execute(sql, (order_detail.order_detail_id, ))
+            cur.execute(sql, (order_detail.OrderDetailId, ))
             con.commit()
             row = cur.rowcount
             if row > 0:

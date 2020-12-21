@@ -150,13 +150,13 @@ def get_all_category():
 @app.route('/category/insert', methods=['POST'])
 def insert_category():
     data = request.json
-    category = bo.Category(category_name=data['category_name'], description=data['description'])
+    category = bo.Category(CategoryName=data['category_name'], Description=data['description'])
     result = do.Category(ConnectionData).insert(category)
     return jsonify({'message': result}), 200
 
 @app.route('/category/get/<int:category_id>')
 def get_category_by_id(category_id):
-    category = bo.Category(category_id=category_id)
+    category = bo.Category(CategoryID=category_id)
     result = do.Category(ConnectionData).get_by_id(category)
     if result[1] != 200:
         return jsonify({'message': result[0]}), result[1]
@@ -165,13 +165,13 @@ def get_category_by_id(category_id):
 @app.route('/category/update/<int:category_id>', methods=['PUT'])
 def update_category_by_id(category_id):
     data = request.json
-    category = bo.Category(category_id=category_id, category_name=data['category_name'], description=data['description'])
+    category = bo.Category(CategoryID=category_id, CategoryName=data['category_name'], Description=data['description'])
     result = do.Category(ConnectionData).update(category)
     return jsonify({'message': result[0]}), result[1]
 
 @app.route('/category/delete/<int:category_id>', methods=['DELETE'])
 def delete_category_by_id(category_id):
-    c = bo.Category(category_id=category_id)
+    c = bo.Category(CategoryID=category_id)
     result = do.Category(ConnectionData).delete(c)
     return jsonify({'message': result[0]}), result[1]
 

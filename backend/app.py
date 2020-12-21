@@ -185,8 +185,8 @@ def order_insert():
 
 @app.route('/order/all')
 def get_all_order():
-    result = do.Order(ConnectionData).get_all()
-    return jsonify(result), 200
+    c = do.Order(ConnectionData).get_all()
+    return jsonify(c), 200
 
 @app.route('/order/<int:order_id>', methods=['GET', 'PUT', 'DELETE'])
 def handle_order(order_id):
@@ -225,17 +225,20 @@ def get_all_order_detail():
 @app.route('/order_detail/<int:order_detail_id>', methods=['GET', 'PUT', 'DELETE'])
 def handle_order_detail(order_detail_id):
     if request.method == 'GET':
+        # Get an order detail
         c = bo.OrderDetail(OrderDetailID=order_detail_id)
         result = do.OrderDetail(ConnectionData).get_by_id(c)
         if result[1] != 200:
             return jsonify({'message': result[0]}), result[1]
         return jsonify(result[0].to_json()), 200
     elif request.method == 'PUT':
+        # Update an order detail
         data = request.json
         c = bo.OrderDetail(OrderDetailID=order_detail_id, OrderID=data['OrderID'], ProductID=data['ProductID'], Quantity=data['Quantity'])
         result = do.OrderDetail(ConnectionData).update(c)
         return jsonify({'message': result[0]}), result[1]
     elif request.method == 'DELETE':
+        # Delete an order detail
         c = bo.OrderDetail(OrderDetailID=order_detail_id)
         result = do.OrderDetail(ConnectionData).delete(c)
         return jsonify({'message': result[0]}), result[1]

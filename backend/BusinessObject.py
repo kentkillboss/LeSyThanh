@@ -137,22 +137,22 @@ class Order:
 
 class OrderDetail:
     def __init__(self, OrderDetailID=None, OrderID=None, ProductID=None, Quantity=None):
-        self.OrderDetailID = OrderDetailID
+        self.order_detail_id = order_detail_id
         self.OrderID = OrderID
-        self.ProductId = ProductId
+        self.ProductID = ProductID
         self.Quantity = Quantity
 
     def fetch_data(self, data):
         self.OrderDetailID = data[0]
         self.OrderID = data[1]
-        self.ProductId = data[2]
+        self.ProductID = data[2]
         self.Quantity = data[3]
 
     def to_json(self):
         return {
             'OrderDetailID': self.OrderDetailID,
             'OrderID': self.OrderID,
-            'ProductId': self.ProductId,
+            'ProductID': self.ProductID,
             'Quantity': self.Quantity
         }
 

@@ -631,7 +631,7 @@ class OrderDetail:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "INSERT INTO tblorderdetails(orderid, ProductID, quantity) VALUES (%s, %s, %s)"
+            sql = "INSERT INTO tblorderdetails(orderid, productid, quantity) VALUES (%s, %s, %s)"
             record_to_insert = (order_detail.OrderID, order_detail.ProductID, order_detail.Quantity)
             cur.execute(sql, record_to_insert)
             con.commit()
@@ -678,7 +678,7 @@ class OrderDetail:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "select * from tblorderdetails where OrderDetailID=%s"
+            sql = "select * from tblorderdetails where orderdetailid=%s"
             cur.execute(sql, (order_detail.OrderDetailID, ))
             con.commit()
             row = cur.fetchone()
@@ -731,7 +731,7 @@ class OrderDetail:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "UPDATE tblorderdetails SET orderid=%s, ProductID=%s, quantity=%s WHERE OrderDetailID=%s"
+            sql = "UPDATE tblorderdetails SET orderid=%s, productid=%s, quantity=%s WHERE orderdetailid=%s"
             cur.execute(sql, (order_detail.OrderID, order_detail.ProductID, order_detail.Quantity, order_detail.OrderDetailID))
             con.commit()
             row = cur.rowcount
@@ -754,7 +754,7 @@ class OrderDetail:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "DELETE FROM tblorderdetails WHERE OrderDetailID=%s"
+            sql = "DELETE FROM tblorderdetails WHERE orderdetailid=%s"
             cur.execute(sql, (order_detail.OrderDetailID, ))
             con.commit()
             row = cur.rowcount
@@ -767,5 +767,6 @@ class OrderDetail:
         finally:
             if con is not None:
                 con.close()
+
 if __name__ == "__main__":
     print('this is data object package')

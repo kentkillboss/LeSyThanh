@@ -631,8 +631,8 @@ class OrderDetail:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "INSERT INTO tblorderdetails(orderid, productid, quantity) VALUES (%s, %s, %s)"
-            record_to_insert = (order_detail.OrderID, order_detail.ProductId, order_detail.Quantity)
+            sql = "INSERT INTO tblorderdetails(orderid, ProductID, quantity) VALUES (%s, %s, %s)"
+            record_to_insert = (order_detail.OrderID, order_detail.ProductID, order_detail.Quantity)
             cur.execute(sql, record_to_insert)
             con.commit()
             con.close()
@@ -678,8 +678,8 @@ class OrderDetail:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "select * from tblorderdetails where orderdetailid=%s"
-            cur.execute(sql, (order_detail.OrderDetailId, ))
+            sql = "select * from tblorderdetails where OrderDetailID=%s"
+            cur.execute(sql, (order_detail.OrderDetailID, ))
             con.commit()
             row = cur.fetchone()
             if row:
@@ -731,8 +731,8 @@ class OrderDetail:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "UPDATE tblorderdetails SET orderid=%s, productid=%s, quantity=%s WHERE orderdetailid=%s"
-            cur.execute(sql, (order_detail.OrderID, order_detail.ProductId, order_detail.Quantity, order_detail.OrderDetailId))
+            sql = "UPDATE tblorderdetails SET orderid=%s, ProductID=%s, quantity=%s WHERE OrderDetailID=%s"
+            cur.execute(sql, (order_detail.OrderID, order_detail.ProductID, order_detail.Quantity, order_detail.OrderDetailID))
             con.commit()
             row = cur.rowcount
             if row > 0:
@@ -754,8 +754,8 @@ class OrderDetail:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "DELETE FROM tblorderdetails WHERE orderdetailid=%s"
-            cur.execute(sql, (order_detail.OrderDetailId, ))
+            sql = "DELETE FROM tblorderdetails WHERE OrderDetailID=%s"
+            cur.execute(sql, (order_detail.OrderDetailID, ))
             con.commit()
             row = cur.rowcount
             if row > 0:

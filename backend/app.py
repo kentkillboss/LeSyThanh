@@ -141,5 +141,107 @@ def delete_supplier_by_id(supplier_id):
     result = do.Supplier(ConnectionData).delete(c)
     return jsonify({'message': result[0]}), result[1]
 
+#category
+@app.route('/category/all')
+def get_all_category():
+    c = do.Category(ConnectionData).get_all()
+    return jsonify(c), 200
+
+@app.route('/category/insert', methods=['POST'])
+def insert_category():
+    data = request.json
+    category = bo.Category(category_name=data['category_name'], description=data['description'])
+    result = do.Category(ConnectionData).insert(category)
+    return jsonify({'message': result}), 200
+
+@app.route('/category/get/<int:category_id>')
+def get_category_by_id(category_id):
+    category = bo.Category(category_id=category_id)
+    result = do.Category(ConnectionData).get_by_id(category)
+    if result[1] != 200:
+        return jsonify({'message': result[0]}), result[1]
+    return jsonify(result[0].to_json()), 200
+
+@app.route('/category/update/<int:category_id>', methods=['PUT'])
+def update_category_by_id(category_id):
+    data = request.json
+    category = bo.Category(category_id=category_id, category_name=data['category_name'], description=data['description'])
+    result = do.Category(ConnectionData).update(category)
+    return jsonify({'message': result[0]}), result[1]
+
+@app.route('/category/delete/<int:category_id>', methods=['DELETE'])
+def delete_category_by_id(category_id):
+    c = bo.Category(category_id=category_id)
+    result = do.Category(ConnectionData).delete(c)
+    return jsonify({'message': result[0]}), result[1]
+
+#order
+@app.route('/order/insert', methods=['POST'])
+def order_insert():
+    data = request.json
+    c1 = bo.Order(customer_id=data['customer_id'], employee_id=data['employee_id'], order_date=data['order_date'], shipper_id=data['shipper_id'])
+    c2 = do.Order(ConnectionData)
+    s1 = c2.insert(c1)
+    result = {}
+    result['message'] = s1
+    return jsonify(result), 200
+
+@app.route('/order/all')
+def get_all_order():
+    result = do.Order(ConnectionData).get_all()
+    return jsonify(result), 200
+
+@app.route('/order/<int:order_id>', methods=['GET', 'PUT', 'DELETE'])
+def handle_order(order_id):
+    if request.method == 'GET':
+        c = bo.Order(order_id=order_id)
+        result = do.Order(ConnectionData).get_by_id(c)
+        if result[1] != 200:
+            return jsonify({'message': result[0]}), result[1]
+        return jsonify(result[0].to_json()), 200
+    elif request.method == 'PUT':
+        data = request.json
+        c = bo.Order(order_id=order_id, customer_id=data['customer_id'], employee_id=data['employee_id'], order_date=data['order_date'], shipper_id=data['shipper_id'])
+        result = do.Order(ConnectionData).update(c)
+        return jsonify({'message': result[0]}), result[1]
+    elif request.method == 'DELETE':
+        c = bo.Order(order_id=order_id)
+        result = do.Order(ConnectionData).delete(c)
+        return jsonify({'message': result[0]}), result[1]
+
+#ortherdetail
+@app.route('/order_detail/insert', methods=['POST'])
+def order_detail_insert():
+    data = request.json
+    c1 = bo.OrderDetail(order_id=data['order_id'], product_id=data['product_id'], quantity=data['quantity'])
+    c2 = do.OrderDetail(ConnectionData)
+    s1 = c2.insert(c1)
+    result = {}
+    result['message'] = s1
+    return jsonify(result), 200
+
+@app.route('/order_detail/all')
+def get_all_order_detail():
+    result = do.OrderDetail(ConnectionData).get_all()
+    return jsonify(result), 200
+
+@app.route('/order_detail/<int:order_detail_id>', methods=['GET', 'PUT', 'DELETE'])
+def handle_order_detail(order_detail_id):
+    if request.method == 'GET':
+        c = bo.OrderDetail(order_detail_id=order_detail_id)
+        result = do.OrderDetail(ConnectionData).get_by_id(c)
+        if result[1] != 200:
+            return jsonify({'message': result[0]}), result[1]
+        return jsonify(result[0].to_json()), 200
+    elif request.method == 'PUT':
+        data = request.json
+        c = bo.OrderDetail(order_detail_id=order_detail_id, order_id=data['order_id'], product_id=data['product_id'], quantity=data['quantity'])
+        result = do.OrderDetail(ConnectionData).update(c)
+        return jsonify({'message': result[0]}), result[1]
+    elif request.method == 'DELETE':
+        c = bo.OrderDetail(order_detail_id=order_detail_id)
+        result = do.OrderDetail(ConnectionData).delete(c)
+        return jsonify({'message': result[0]}), result[1]
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8080)

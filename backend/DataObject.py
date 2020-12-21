@@ -384,7 +384,7 @@ class Category:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "INSERT INTO tblcategories(categoryname, description) VALUES (%s, %s)"
-            record_to_insert = (category.category_name, category.description)
+            record_to_insert = (category.CategoryName, category.Description)
             cur.execute(sql, record_to_insert)
             con.commit()
             con.close()
@@ -456,7 +456,7 @@ class Category:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "UPDATE tblcategories SET categoryname=%s, description=%s WHERE categoryid=%s"
-            cur.execute(sql, (category.category_name, category.description, category.category_id))
+            cur.execute(sql, (category.CategoryName, category.Description, category.CategoryID))
             con.commit()
             row = cur.rowcount
             if row > 0:

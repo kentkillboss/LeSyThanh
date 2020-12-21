@@ -137,7 +137,7 @@ class Order:
 
 class OrderDetail:
     def __init__(self, OrderDetailID=None, OrderID=None, ProductID=None, Quantity=None):
-        self.order_detail_id = order_detail_id
+        self.OrderDetailID = OrderDetailID
         self.OrderID = OrderID
         self.ProductID = ProductID
         self.Quantity = Quantity

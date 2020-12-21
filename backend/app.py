@@ -150,7 +150,7 @@ def get_all_category():
 @app.route('/category/insert', methods=['POST'])
 def insert_category():
     data = request.json
-    category = bo.Category(CategoryName=data['category_name'], Description=data['description'])
+    category = bo.Category(CategoryName=data['CategoryName'], Description=data['Description'])
     result = do.Category(ConnectionData).insert(category)
     return jsonify({'message': result}), 200
 
@@ -165,7 +165,7 @@ def get_category_by_id(category_id):
 @app.route('/category/update/<int:category_id>', methods=['PUT'])
 def update_category_by_id(category_id):
     data = request.json
-    category = bo.Category(CategoryID=category_id, CategoryName=data['category_name'], Description=data['description'])
+    category = bo.Category(CategoryID=category_id, CategoryName=data['CategoryName'], Description=data['Description'])
     result = do.Category(ConnectionData).update(category)
     return jsonify({'message': result[0]}), result[1]
 

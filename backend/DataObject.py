@@ -5,8 +5,8 @@ from BusinessObject import Supplier as SupplierEntity
 from BusinessObject import Category as CategoryEntity
 from BusinessObject import Order as OrderEntity
 from BusinessObject import OrderDetail as OrderDetailEntity
-from BusinessObjects import Product as ProductEntity
-from BusinessObjects import Shipper as ShipperEntity
+from BusinessObject import Product as ProductEntity
+from BusinessObject import Shipper as ShipperEntity
 
 class Customer:
     def __init__(self,ConnectionData):

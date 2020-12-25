@@ -527,7 +527,7 @@ class Order:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "select * from tblorders ord join tblcustomers cus on ord.customerid=cus.customerid join tblemployees emp on ord.employeeid=emp.employeeid join tblshippers ship on ord.shipperid=ship.shipperid"
+            sql = "select * from tblorders"
             cur.execute(sql)
             con.commit()
             rows = cur.fetchall()
@@ -555,7 +555,7 @@ class Order:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "select * from tblorders ord join tblcustomers cus on ord.customerid=cus.customerid join tblemployees emp on ord.employeeid=emp.employeeid join tblshippers ship on ord.shipperid=ship.shipperid where orderid=%s"
+            sql = "select * from tblorders where orderid=%s"
             cur.execute(sql, (order.OrderID, ))
             con.commit()
             row = cur.fetchone()

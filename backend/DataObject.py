@@ -553,15 +553,13 @@ class Order:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "select * from tblorders where orderid=%s"
+            sql = "select * from tblorders"
             cur.execute(sql, (order.OrderID, ))
             con.commit()
             row = cur.fetchone()
-            order_detail = OrderDetail(self.ConnectionData)
             if row:
-                c = OrderEntity()
+                c = OrderDetailEntity()
                 c.fetch_data(row)
-                c.details = order_detail.get_by_order_id(c)
                 return c, 200
             con.close()
             return 'Order ID not found', 404

@@ -120,16 +120,14 @@ class Order:
         self.EmployeeID = data[2]
         self.OrderDate = data[3]
         self.ShipperID = data[4]
-        self.Details = data[5]
 
     def to_json(self):
         return {
             'OrderID': self.OrderID,
+            'CustomerID': self.CustomerID,
+            'EmployeeID': self.EmployeeID,
             'OrderDate': self.OrderDate,
-            'customer': self.customer,
-            'employee': self.employee,
-            'shipper': self.shipper,
-            'Details': self.Details
+            'ShipperID': self.ShipperID
         }
 
 class OrderDetail:

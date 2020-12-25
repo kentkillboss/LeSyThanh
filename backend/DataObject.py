@@ -433,7 +433,7 @@ class Category:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "SELECT * FROM tblcategories WHERE categoryid=%s"
-            cur.execute(sql, (category.category_id, ))
+            cur.execute(sql, (category.CategoryID, ))
             con.commit()
             row = cur.fetchone()
             if row:
@@ -493,6 +493,7 @@ class Category:
         finally:
             if con is not None:
                 con.close()
+
 class Order:
     def __init__(self, ConnectionData):
         self.ConnectionData = ConnectionData
@@ -506,8 +507,8 @@ class Order:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "INSERT INTO tblorders(customerid, employeeid, orderdate, shipperid) VALUES (%s, %s, %s, %s)"
-            record_to_insert = (order.CustomerID, order.EmployeeID, order.OrderDate, order.ShipperID)
+            sql = "INSERT INTO tblorders(customerid, employeeid, orderdata, shipperid) VALUES (%s, %s, %s, %s)"
+            record_to_insert = (order.CustomerID, order.EmployeeID, order.OrderDate, order.OrderDate)
             cur.execute(sql, record_to_insert)
             con.commit()
             con.close()
@@ -527,14 +528,14 @@ class Order:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "select * from tblorders"
+            sql = "SELECT * FROM tblorders"
             cur.execute(sql)
             con.commit()
             rows = cur.fetchall()
             result = []
             for row in rows:
                 c = OrderEntity()
-                c.fetch_data(row)
+                c.fetch_data(row)            
                 result.append(c.to_json())
             con.close()
             return result
@@ -553,18 +554,17 @@ class Order:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "select * from tblorders"
+            sql = "SELECT * FROM tblorders WHERE orderid=%s"
             cur.execute(sql, (order.OrderID, ))
             con.commit()
             row = cur.fetchone()
             if row:
-                c = OrderDetailEntity()
+                c = OrderEntity()
                 c.fetch_data(row)
                 return c, 200
             con.close()
-            return 'Order ID not found', 404
+            return 'order ID not found', 404
         except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
             return str(error)
         finally:
             if con is not None:
@@ -579,21 +579,21 @@ class Order:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "UPDATE tblorders SET customerid=%s, employeeid=%s, orderdate=%s, shipperid=%s WHERE orderid=%s"
+            sql = "UPDATE tblorders SET customerid=%s, employeeid=%s, orderdata=%s, shipperid=%s WHERE orderid=%s"
             cur.execute(sql, (order.CustomerID, order.EmployeeID, order.OrderDate, order.ShipperID, order.OrderID))
             con.commit()
             row = cur.rowcount
             if row > 0:
                 return 'Updated order', 200
             con.close()
-            return 'Order ID not found', 404
+            return 'order ID not found', 404
         except (Exception, psycopg2.DatabaseError) as error:
             return str(error)
         finally:
             if con is not None:
                 con.close()
 
-    def delete(self, order: OrderEntity):
+    def delete(self, category: CategoryEntity):
         con = None
         try:
             con = psycopg2.connect(user=self.ConnectionData['user'],
@@ -609,7 +609,7 @@ class Order:
             if row > 0:
                 return 'Deleted order', 200
             con.close()
-            return 'Order ID not found', 404
+            return 'order ID not found', 404
         except (Exception, psycopg2.DatabaseError) as error:
             return str(error)
         finally:
@@ -620,7 +620,7 @@ class OrderDetail:
     def __init__(self, ConnectionData):
         self.ConnectionData = ConnectionData
 
-    def insert(self, order_detail: OrderDetailEntity):
+    def insert(self, orderr: OrderDetailEntity):
         con = None
         try:
             con = psycopg2.connect(user=self.ConnectionData['user'],
@@ -630,7 +630,7 @@ class OrderDetail:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "INSERT INTO tblorderdetails(orderid, productid, quantity) VALUES (%s, %s, %s)"
-            record_to_insert = (order_detail.OrderID, order_detail.ProductID, order_detail.Quantity)
+            record_to_insert = (orderr.OrderID, orderr.ProductID, orderr.Quantity)
             cur.execute(sql, record_to_insert)
             con.commit()
             con.close()
@@ -650,14 +650,14 @@ class OrderDetail:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "select * from tblorderdetails"
+            sql = "SELECT * FROM tblorderdetails"
             cur.execute(sql)
             con.commit()
             rows = cur.fetchall()
             result = []
             for row in rows:
                 c = OrderDetailEntity()
-                c.fetch_data(row)
+                c.fetch_data(row)            
                 result.append(c.to_json())
             con.close()
             return result
@@ -667,7 +667,7 @@ class OrderDetail:
             if con is not None:
                 con.close()
 
-    def get_by_id(self, order_detail: OrderDetailEntity):
+    def get_by_id(self, orderr: OrderDetailEntity):
         con = None
         try:
             con = psycopg2.connect(user=self.ConnectionData['user'],
@@ -676,8 +676,8 @@ class OrderDetail:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "select * from tblorderdetails where orderdetailid=%s"
-            cur.execute(sql, (order_detail.OrderDetailID, ))
+            sql = "SELECT * FROM tblorderdetails WHERE orderdetailid=%s"
+            cur.execute(sql, (orderr.OrderDetailID, ))
             con.commit()
             row = cur.fetchone()
             if row:
@@ -685,15 +685,14 @@ class OrderDetail:
                 c.fetch_data(row)
                 return c, 200
             con.close()
-            return 'Order Detail ID not found', 404
+            return 'order detail ID not found', 404
         except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
             return str(error)
         finally:
             if con is not None:
                 con.close()
 
-    def update(self, order_detail: OrderDetailEntity):
+    def update(self, orderr: OrderDetailEntity):
         con = None
         try:
             con = psycopg2.connect(user=self.ConnectionData['user'],
@@ -703,20 +702,20 @@ class OrderDetail:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "UPDATE tblorderdetails SET orderid=%s, productid=%s, quantity=%s WHERE orderdetailid=%s"
-            cur.execute(sql, (order_detail.OrderID, order_detail.ProductID, order_detail.Quantity, order_detail.OrderDetailID))
+            cur.execute(sql, (orderr.OrderID, orderr.ProductID, orderr.Quantity, orderr.OrderDetailID))
             con.commit()
             row = cur.rowcount
             if row > 0:
-                return 'Updated order detail', 200
+                return 'Updated order', 200
             con.close()
-            return 'Order Detail ID not found', 404
+            return 'order detail ID not found', 404
         except (Exception, psycopg2.DatabaseError) as error:
             return str(error)
         finally:
             if con is not None:
                 con.close()
 
-    def delete(self, order_detail: OrderDetailEntity):
+    def delete(self, orderr: OrderDetailEntity):
         con = None
         try:
             con = psycopg2.connect(user=self.ConnectionData['user'],
@@ -726,13 +725,13 @@ class OrderDetail:
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
             sql = "DELETE FROM tblorderdetails WHERE orderdetailid=%s"
-            cur.execute(sql, (order_detail.OrderDetailID, ))
+            cur.execute(sql, (orderr.OrderDetailID, ))
             con.commit()
             row = cur.rowcount
             if row > 0:
                 return 'Deleted order detail', 200
             con.close()
-            return 'Order Detail ID not found', 404
+            return 'order detail ID not found', 404
         except (Exception, psycopg2.DatabaseError) as error:
             return str(error)
         finally:

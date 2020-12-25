@@ -183,6 +183,14 @@ def order_insert():
     result = do.Order(ConnectionData).insert(order)
     return jsonify({'message': result}), 200
 
+@app.route('/order/get/<int:order_id>')
+def get_order_by_id(order_id):
+    c = bo.Order(CustomerID=order_id)
+    result = do.Order(ConnectionData).get_by_id(c)
+    if result[1] != 200:
+        return jsonify({'message':result[0]}), result[1]
+    return jsonify(result[0].to_json()), 200
+
 @app.route('/order/all')
 def get_all_order():
     c = do.Order(ConnectionData).get_all()

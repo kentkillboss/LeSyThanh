@@ -107,31 +107,28 @@ class Category:
         }
 
 class Order:
-    def __init__(self, OrderID=None, CustomerID=None, EmployeeID=None, OrderDate=None, ShipperID=None, Details=[]):
+    def __init__(self, OrderID=None, CustomerID=None, EmployeeID=None, OrderDate=None, ShipperID=None):
         self.OrderID = OrderID
         self.CustomerID = CustomerID
         self.EmployeeID = EmployeeID
         self.OrderDate = OrderDate
         self.ShipperID = ShipperID
-        self.Details = Details
 
     def fetch_data(self, data):
         self.OrderID = data[0]
+        self.CustomerID = data[1]
+        self.EmployeeID = data[2]
         self.OrderDate = data[3]
-        self.customer = Customer()
-        self.customer.fetch_data(data[5:12])
-        self.employee = Employee()
-        self.employee.fetch_data(data[12:18])
-        self.shipper = Shipper()
-        self.shipper.fetch_data(data[18:21])
+        self.ShipperID = data[4]
+        self.Details = data[5]
 
     def to_json(self):
         return {
             'OrderID': self.OrderID,
             'OrderDate': self.OrderDate,
-            'customer': self.customer.to_json(),
-            'employee': self.employee.to_json(),
-            'shipper': self.shipper.to_json(),
+            'customer': self.customer,
+            'employee': self.employee,
+            'shipper': self.shipper,
             'Details': self.Details
         }
 

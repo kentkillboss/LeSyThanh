@@ -532,11 +532,9 @@ class Order:
             con.commit()
             rows = cur.fetchall()
             result = []
-            order_detail = OrderDetail(self.ConnectionData)
             for row in rows:
                 c = OrderEntity()
                 c.fetch_data(row)
-                c.details = order_detail.get_by_order_id(c)
                 result.append(c.to_json())
             con.close()
             return result

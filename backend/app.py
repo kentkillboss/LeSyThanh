@@ -243,5 +243,79 @@ def handle_order_detail(order_detail_id):
         result = do.OrderDetail(ConnectionData).delete(c)
         return jsonify({'message': result[0]}), result[1]
 
+#Product
+@app.route('/product/insert', methods=['POST'])
+def product_insert():
+    data = request.json
+    c1 = bo.Product(data['ProductID'], data['ProductName'], data['SupplierID'], data['CategoryID'], data['Unit'], data['Price'])
+    c2 = do.Product(ConnectionData)
+    s1 = c2.insert(c1)
+    result = {}
+    result['message'] = s1
+    return jsonify(result), 200
+
+@app.route('/product/all')
+def get_all_product():
+    result = do.Product(ConnectionData).get_all()
+    return jsonify(result), 200
+
+@app.route('/product/get/<int:product_id>')
+def get_product_by_id(product_id):
+    c = bo.Product(ProductID=product_id)
+    result = do.Product(ConnectionData).get_by_id(c)
+    if result[1] != 200:
+        return jsonify({'message': result[0]}), result[1]
+    return jsonify(result[0].to_json()), 200
+
+@app.route('/product/update/<int:product_id>', methods=['PUT'])
+def update_product_by_id(product_id):
+    data = request.json
+    c = bo.Product(ProductID = product_id, ProductName=data['ProductName'], SupplierID=data['SupplierID'], CategoryID=data['CategoryID'], Unit=data['Unit'], Price=data['Price'])
+    result = do.Product(ConnectionData).update(c)
+    return jsonify({'message':result[0]}),result[1]
+
+@app.route('/product/delete/<int:product_id>', methods=['DELETE'])
+def delete_product_by_id(product_id):
+    c = bo.Product(ProductID=product_id)
+    result = do.Product(ConnectionData).delete(c)
+    return jsonify({'message':result[0]}),result[1]
+
+#Shipper
+@app.route('/shipper/insert', methods=['POST'])
+def shipper_insert():
+    data = request.json
+    c1 = bo.Shipper(data['ShipperID'], data['ShipperName'], data['Phone'])
+    c2 = do.Shipper(ConnectionData)
+    s1 = c2.insert(c1)
+    result = {}
+    result['message'] = s1
+    return jsonify(result), 200
+
+@app.route('/shipper/all')
+def get_all_shipper():
+    result = do.Shipper(ConnectionData).get_all()
+    return jsonify(result), 200
+
+@app.route('/shipper/get/<int:shipper_id>')
+def get_shipper_by_id(shipper_id):
+    c = bo.Shipper(ShipperID=shipper_id)
+    result = do.Shipper(ConnectionData).get_by_id(c)
+    if result[1] != 200:
+        return jsonify({'message': result[0]}), result[1]
+    return jsonify(result[0].to_json()), 200
+
+@app.route('/shipper/update/<int:shipper_id>', methods=['PUT'])
+def update_shipper_by_id(shipper_id):
+    data = request.json
+    c = bo.Shipper(ShipperID = shipper_id, ShipperName=data['ShipperName'], Phone=data['Phone'])
+    result = do.Shipper(ConnectionData).update(c)
+    return jsonify({'message':result[0]}),result[1]
+
+@app.route('/shipper/delete/<int:shipper_id>', methods=['DELETE'])
+def delete_shipper_by_id(shipper_id):
+    c = bo.Shipper(ShipperID=shipper_id)
+    result = do.Shipper(ConnectionData).delete(c)
+    return jsonify({'message':result[0]}),result[1]
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8080)

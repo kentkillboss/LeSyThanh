@@ -579,7 +579,7 @@ class Order:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "UPDATE tblorders SET customerid=%s, employeeid=%s, orderdata=%s, shipperid=%s WHERE orderid=%s"
+            sql = "UPDATE tblorders SET customerid=%s, employeeid=%s, orderdate=%s, shipperid=%s WHERE orderid=%s"
             cur.execute(sql, (order.CustomerID, order.EmployeeID, order.OrderDate, order.ShipperID, order.OrderID))
             con.commit()
             row = cur.rowcount
@@ -593,7 +593,7 @@ class Order:
             if con is not None:
                 con.close()
 
-    def delete(self, category: CategoryEntity):
+    def delete(self, order: OrderEntity):
         con = None
         try:
             con = psycopg2.connect(user=self.ConnectionData['user'],

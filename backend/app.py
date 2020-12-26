@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-import flask_cors import CORS
+from flask_cors import CORS
 import os
 import BusinessObject as bo
 import DataObject as do 

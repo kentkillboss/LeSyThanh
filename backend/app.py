@@ -37,7 +37,7 @@ def test_send_receive():
 @app.route('/user/insert', methods=['POST'])
 def user_insert():
     data = request.json
-    c1 = bo.Customer(data['CustomerID'], data['CustomerName'], data['ContactName'], data['Address'], data['City'], data['PostalCode'], data['Country'])
+    c1 = bo.Customer(data['CustomerName'], data['ContactName'], data['Address'], data['City'], data['PostalCode'], data['Country'])
     c2 = do.Customer(ConnectionData)
     s1 = c2.insert(c1)
     result = {}

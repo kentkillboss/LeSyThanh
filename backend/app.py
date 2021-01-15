@@ -250,7 +250,7 @@ def delete_order_detail_by_id(odd_id):
 @app.route('/product/insert', methods=['POST'])
 def product_insert():
     data = request.json
-    c1 = bo.Product(data['ProductID'], data['ProductName'], data['SupplierID'], data['CategoryID'], data['Unit'], data['Price'])
+    c1 = bo.Product(1, data['ProductName'], data['SupplierID'], data['CategoryID'], data['Unit'], data['Price'])
     c2 = do.Product(ConnectionData)
     s1 = c2.insert(c1)
     result = {}

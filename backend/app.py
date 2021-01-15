@@ -287,7 +287,7 @@ def delete_product_by_id(product_id):
 @app.route('/shipper/insert', methods=['POST'])
 def shipper_insert():
     data = request.json
-    c1 = bo.Shipper(1, data['ShipperName'], data['Phone'])
+    c1 = bo.Shipper(ShipperID=data['ShipperID'], ShipperName=data['ShipperName'], Phone=data['Phone'])
     c2 = do.Shipper(ConnectionData)
     s1 = c2.insert(c1)
     result = {}

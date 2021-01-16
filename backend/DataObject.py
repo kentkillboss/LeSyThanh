@@ -871,8 +871,8 @@ class Shipper:
                                   port=self.ConnectionData['port'],
                                   database=self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "INSERT INTO tblshippers(ShipperID, ShipperName, Phone) VALUES (%s, %s, %s)"
-            record_to_insert = (shipper.ShipperID, shipper.ShipperName, shipper.Phone)
+            sql = "INSERT INTO tblshippers(ShipperName, Phone) VALUES (%s, %s)"
+            record_to_insert = (shipper.ShipperName, shipper.Phone)
             cur.execute(sql, record_to_insert)
             con.commit()
             con.close()

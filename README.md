@@ -91,7 +91,7 @@
     - City: string
     - PostalCode: string
     - Country: string
-Response: Message
+- Response: Message
 ### Update a customer
 - Request:
   - Method: PUT
@@ -103,7 +103,7 @@ Response: Message
     - City: string
     - PostalCode: string
     - Country: string
-Response: Message
+- Response: Message
 ### Delete a customer
 - Request:
   - Method: DELETE

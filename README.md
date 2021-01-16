@@ -5,14 +5,14 @@
 
 ## Câu lệnh sử dụng
 
-sudo docker pull postgres:alpine
-sudo docker build -t backend .
-sudo docker run -d --name backend --env db_ip=10.0.2.15 -p 8080:8080 backend
-sudo docker run -d --restart unless-stopped --name postgres-0 -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres -p 5432:5432 postgres:alpine
-sudo docker exec -it postgres-0 bash
-psql -U postgres
-sudo docker stop backend
-sudo docker rm backend
+-sudo docker pull postgres:alpine
+-sudo docker build -t backend .
+-sudo docker run -d --name backend --env db_ip=10.0.2.15 -p 8080:8080 backend
+-sudo docker run -d --restart unless-stopped --name postgres-0 -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres -p 5432:5432 postgres:alpine
+-sudo docker exec -it postgres-0 bash
+-psql -U postgres
+-sudo docker stop backend
+-sudo docker rm backend
 
 sudo netstat -nl | head
 sudo kill -9 $(sudo lsof -t -i:5432)

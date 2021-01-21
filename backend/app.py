@@ -153,7 +153,7 @@ def get_all_category():
 @app.route('/category/insert', methods=['POST'])
 def insert_category():
     data = request.json
-    category = bo.Category(CategoryName=data['CategoryName'], Description=data['Description'])
+    category = bo.Category(1,data['CategoryName'],data['Description'])
     result = do.Category(ConnectionData).insert(category)
     return jsonify({'message': result}), 200
 

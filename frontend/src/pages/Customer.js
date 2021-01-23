@@ -3,6 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 const url="http://192.168.1.6:8080/user/all";
@@ -142,29 +143,16 @@ console.log(this.state.form);
                   <span style={{float: 'right'}} onClick={()=>this.handleinsert()}>x</span>
                 </ModalHeader>
                 <ModalBody>
-                  <div className="form-group">
-                    <label htmlFor="id">ID</label>
-                    <input className="form-control" type="text" name="CustomerID" id="id" readOnly onChange={this.handleChange} value={form?form.CustomerID: this.state.data.length+1}/>
-                    <br />
-                    <label htmlFor="a">CustomerName</label>
-                    <input className="form-control" type="text" name="CustomerName" id="CustomerName" onChange={this.handleChange} value={form?form.CustomerName: ''}/>
-                    <br />
-                    <label htmlFor="a">ContactName</label>
-                    <input className="form-control" type="text" name="ContactName" id="ContactName" onChange={this.handleChange} value={form?form.ContactName: ''}/>
-                    <br />
-                    <label htmlFor="a">Address</label>
-                    <input className="form-control" type="text" name="Address" id="Address" onChange={this.handleChange} value={form?form.Address: ''}/>
-                    <br />
-                    <label htmlFor="a">City</label>
-                    <input className="form-control" type="text" name="City" id="City" onChange={this.handleChange} value={form?form.City: ''}/>
-                    <br />
-                    <label htmlFor="a">PostalCode</label>
-                    <input className="form-control" type="text" name="PostalCode" id="PostalCode" onChange={this.handleChange} value={form?form.PostalCode: ''}/>
-                    <br />
-                    <label htmlFor="a">Country</label>
-                    <input className="form-control" type="text" name="Country" id="Country" onChange={this.handleChange} value={form?form.Country: ''}/>
-                    <br />
-                  </div>
+                <div>
+                    <AvForm >
+                        <AvField name="CustomerName" label="CustomerName" type="text" onChange={this.handleChange} value={form?form.CustomerName: '' } required />
+                        <AvField name="ContactName" label="ContactName" type="text" onChange={this.handleChange} value={form?form.ContactName: '' } required />
+                        <AvField name="Address" label="Address" type="text" onChange={this.handleChange} value={form?form.Address: '' } required />
+                        <AvField name="City" label="City" type="text" onChange={this.handleChange} value={form?form.City: '' } required />
+                        <AvField name="PostalCode" label="PostalCode" type="text" onChange={this.handleChange} value={form?form.PostalCode: '' } required />
+                        <AvField name="Country" label="Country" type="text" onChange={this.handleChange} value={form?form.Country: '' } required />
+                    </AvForm>
+                 </div>
                 </ModalBody>
 
                 <ModalFooter>

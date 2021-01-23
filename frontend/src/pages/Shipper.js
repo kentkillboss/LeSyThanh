@@ -130,8 +130,8 @@ console.log(this.state.form);
                 <ModalBody>
                 <div>
                     <AvForm >
-                        <AvField name="ShipperName" label="ShipperName" type="text" onChange={this.handleChange} value={form?form.Description: '' } required />
-                        <AvField name="Phone" label="Phone" type="text" onChange={this.handleChange} value={form?form.Description: '' } required />
+                        <AvField name="ShipperName" label="ShipperName" type="text" onChange={this.handleChange} value={form?form.ShipperName: '' } required />
+                        <AvField name="Phone" label="Phone" type="text" onChange={this.handleChange} value={form?form.Phone: '' } required />
                     </AvForm>
                 </div>
                   {/* <div className="form-group">

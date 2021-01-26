@@ -11,10 +11,13 @@ import Product from './pages/Product';
 import Order from './pages/Order';
 import OrderDetail from './pages/OrderDetail';
 import Shipper from './pages/Shipper';
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
+    <div className="page-container">
+      <div className="content-wrap">
       <Router>
         <Navbar />
         <Switch>
@@ -29,6 +32,9 @@ function App() {
           <Route path='/shipper' component={Shipper} />
         </Switch>
       </Router>
+      </div>
+      <Footer />
+    </div>
     </>
   );
 }

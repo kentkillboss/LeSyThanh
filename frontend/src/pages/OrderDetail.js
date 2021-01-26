@@ -6,10 +6,10 @@ import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 
-const url="http://192.168.1.5:8080/order_detail/all";
-const urldelete = "http://192.168.1.5:8080/order_detail/delete/";
-const urlupdate = "http://192.168.1.5:8080/order_detail/update/";
-const urladd = "http://192.168.1.5:8080/order_detail/insert";
+const url="http://192.168.1.234:8080/order_detail/all";
+const urldelete = "http://192.168.1.234:8080/order_detail/delete/";
+const urlupdate = "http://192.168.1.234:8080/order_detail/update/";
+const urladd = "http://192.168.1.234:8080/order_detail/insert";
 
 class App extends Component {
 state={
@@ -142,8 +142,8 @@ console.log(this.state.form);
                 <ModalBody>
                 <div>
                     <AvForm >
-                        <AvField name="OrderID" label="OrderID" type="text" onChange={this.handleChange} value={form?form.OrderID: '' } required />
-                        <AvField name="ProductID" label="ProductID" type="text" onChange={this.handleChange} value={form?form.ProductID: '' } required />
+                        <AvField name="OrderID" label="OrderID" type="text" onChange={this.handleChange} value={form?form.OrderID: '' } placeholder = "Chỉ nhập số" required />
+                        <AvField name="ProductID" label="ProductID" type="text" onChange={this.handleChange} value={form?form.ProductID: '' } placeholder = "Chỉ nhập số" required />
                         <AvField name="Quantity" label="Quantity" type="text" onChange={this.handleChange} value={form?form.Quantity: '' } required />
                     </AvForm>
                 </div>

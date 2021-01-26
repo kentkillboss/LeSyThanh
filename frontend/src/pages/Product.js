@@ -6,10 +6,10 @@ import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Button,Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
-const url="http://192.168.1.6:8080/product/all";
-const urldelete = "http://192.168.1.6:8080/product/delete/";
-const urlupdate = "http://192.168.1.6:8080/product/update/";
-const urladd = "http://192.168.1.6:8080/product/insert";
+const url="http://192.168.1.234:8080/product/all";
+const urldelete = "http://192.168.1.234:8080/product/delete/";
+const urlupdate = "http://192.168.1.234:8080/product/update/";
+const urladd = "http://192.168.1.234:8080/product/insert";
 
 class App extends Component {
 state={
@@ -142,8 +142,8 @@ console.log(this.state.form);
                 <div>
                     <AvForm >
                         <AvField name="ProductName" label="ProductName" type="text" onChange={this.handleChange} value={form?form.ProductName: '' } required />
-                        <AvField name="SupplierID" label="SupplierID" type="text" onChange={this.handleChange} value={form?form.SupplierID: '' } required />
-                        <AvField name="CategoryID" label="CategoryID" type="text" onChange={this.handleChange} value={form?form.CategoryID: '' } required />
+                        <AvField name="SupplierID" label="SupplierID" type="text" onChange={this.handleChange} value={form?form.SupplierID: '' } placeholder = "Chỉ nhập số" required />
+                        <AvField name="CategoryID" label="CategoryID" type="text" onChange={this.handleChange} value={form?form.CategoryID: '' } placeholder = "Chỉ nhập số" required />
                         <AvField name="Unit" label="Unit" type="text" onChange={this.handleChange} value={form?form.Unit: '' } required />
                         <AvField name="Price" label="Price" type="text" onChange={this.handleChange} value={form?form.Price: '' } required />
                         

@@ -6,10 +6,10 @@ import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 
-const url="http://192.168.1.5:8080/order/all";
-const urldelete = "http://192.168.1.5:8080/order/delete/";
-const urlupdate = "http://192.168.1.5:8080/order/update/";
-const urladd = "http://192.168.1.5:8080/order/insert";
+const url="http://192.168.1.234:8080/order/all";
+const urldelete = "http://192.168.1.234:8080/order/delete/";
+const urlupdate = "http://192.168.1.234:8080/order/update/";
+const urladd = "http://192.168.1.234:8080/order/insert";
 
 class App extends Component {
 state={
@@ -44,7 +44,7 @@ axios.get(url).then(response=>{
 }
 
 handlepost=async()=>{
-  //delete this.state.form.OrderID;
+  delete this.state.form.OrderID;
  await axios.post(urladd,this.state.form).then(response=>{
     this.handleinsert();
     this.handleget();
@@ -146,10 +146,10 @@ console.log(this.state.form);
                 <ModalBody>
                 <div>
                     <AvForm >
-                        <AvField name="CustomerID" label="CustomerID" type="text" onChange={this.handleChange} value={form?form.CustomerID: '' } required />
-                        <AvField name="EmployeeID" label="EmployeeID" type="text" onChange={this.handleChange} value={form?form.EmployeeID: '' } required />
+                        <AvField name="CustomerID" label="CustomerID" type="text" onChange={this.handleChange} value={form?form.CustomerID: '' } placeholder = "Chỉ nhập số" required />
+                        <AvField name="EmployeeID" label="EmployeeID" type="text" onChange={this.handleChange} value={form?form.EmployeeID: '' } placeholder = "Chỉ nhập số" required />
                         <AvField name="OrderDate" label="OrderDate" type="text" onChange={this.handleChange} value={form?form.OrderDate: '' } placeholder = "x/x/xxxx" required />
-                        <AvField name="ShipperID" label="ShipperID" type="text" onChange={this.handleChange} value={form?form.ShipperID: '' } required />
+                        <AvField name="ShipperID" label="ShipperID" type="text" onChange={this.handleChange} value={form?form.ShipperID: '' } placeholder = "Chỉ nhập số" required />
                     </AvForm>
                 </div>
                 </ModalBody>

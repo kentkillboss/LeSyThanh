@@ -116,6 +116,7 @@ console.log(this.state.form);
           <th>PostalCode</th>
           <th>Country</th>
           <th>Phone</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>

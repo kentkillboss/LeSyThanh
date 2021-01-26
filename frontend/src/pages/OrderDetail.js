@@ -112,6 +112,7 @@ console.log(this.state.form);
           <th>OrderID</th>
           <th>ProductID</th>
           <th>Quantity</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>

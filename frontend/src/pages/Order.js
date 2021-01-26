@@ -115,6 +115,7 @@ console.log(this.state.form);
           <th>EmployeeID</th>
           <th>OrderDate</th>
           <th>ShipperID</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>

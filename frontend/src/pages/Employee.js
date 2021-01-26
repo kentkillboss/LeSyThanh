@@ -118,6 +118,7 @@ console.log(this.state.form);
           <th>Birthdate</th>
           <th>Photo</th>
           <th>Notes</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>

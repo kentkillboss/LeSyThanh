@@ -110,18 +110,20 @@ console.log(this.state.form);
           <th>CategoryID</th>
           <th>Unit</th>
           <th>Price</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         {this.state.data.map(item=>{
           return(
             <tr>
-          <td>{item.ProductName}</td>
-          <td>{item.SupplierID}</td>
-          <td>{item.CategoryID}</td>
-          <td>{item.Unit}</td>
-          <td>{item.Price}</td>
-          <td>
+              <td>{item.ProductID}</td>
+              <td>{item.ProductName}</td>
+              <td>{item.SupplierID}</td>
+              <td>{item.CategoryID}</td>
+              <td>{item.Unit}</td>
+              <td>{item.Price}</td>
+            <td>
                 <button className="btn btn-primary" onClick={()=>{this.selectedItem(item); this.handleinsert()}}><FontAwesomeIcon icon={faEdit}/></button>
                 {"   "}
                 <button className="btn btn-danger" onClick={()=>{this.selectedItem(item); this.setState({handledelete: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>

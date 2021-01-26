@@ -102,6 +102,7 @@ console.log(this.state.form);
           <th>ID</th>
           <th>CategoryName</th>
           <th>Description</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>

@@ -33,7 +33,7 @@ axios.get(url).then(response=>{
 }
 
 handlepost=async()=>{
-  delete this.state.form.ShipperID;
+  //delete this.state.form.ShipperID;
  await axios.post(urladd,this.state.form).then(response=>{
     this.handleinsert();
     this.handleget();

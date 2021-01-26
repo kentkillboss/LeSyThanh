@@ -49,22 +49,22 @@
 	Description: string
 ## Order
 	OrderID: int
-	CustomerID: string
-	EmployeeID: string
+	CustomerID: int
+	EmployeeID: int
 	OrderDate: date
-	ShipperID: string
+	ShipperID: int
 ## Orther detail
 	OrderDetailID: int
-	OrderID: string
-	ProductID: string
-	Quantity: string
+	OrderID: int
+	ProductID: int
+	Quantity: int
 ## Product
 	ProductID: int
 	ProductName: string
-	SupplierID: string
-	CategoryID: string
+	SupplierID: int
+	CategoryID: int
 	Unit: string
-	Price: string
+	Price: int
 ## Shipper
 	ShipperID: int
 	ShipperName: string

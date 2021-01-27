@@ -53,7 +53,7 @@
 	EmployeeID: int
 	OrderDate: date
 	ShipperID: int
-## Orther detail
+## Order detail
 	OrderDetailID: int
 	OrderID: int
 	ProductID: int
@@ -251,14 +251,14 @@ Response: [category]
 - Response: message
 
 ## orther detail
-### Get all orther detail
+### Get all order detail
 - Request:
   - Method: GET
   - Endpoint: /order_detail/all
   - Params: None
   - Body: None
 - Response: [order_detail]
-### Add a orther detail
+### Add a order detail
 - Request:
   - Method: POST
   - Endpoint: /order_detail/insert
@@ -267,7 +267,7 @@ Response: [category]
     - ProductID: string
     - Quantity: string
 - Response: Message
-### Update a orther detail
+### Update a order detail
 - Request:
   - Method: PUT
   - Endpoint: /order_detail/update/:odd_id
@@ -276,7 +276,7 @@ Response: [category]
     - ProductID: string
     - Quantity: string
 - Response: Message
-### Delete a orther detail
+### Delete a order detail
 - Request:
   - Method: DELETE
   - Endpoint: /order_detail/delete/:odd_id

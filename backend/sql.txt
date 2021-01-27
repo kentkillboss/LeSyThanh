@@ -43,10 +43,10 @@ CREATE TABLE tblemployees (
 CREATE TABLE tblproducts (
     ProductID SERIAL PRIMARY KEY,
     ProductName varchar(255),
-    Unit varchar(255),
-    Price int,
     SupplierID int,
-    CategoryID int
+    CategoryID int,
+    Unit varchar(255),
+    Price int
 );
 
 CREATE TABLE tblorders (

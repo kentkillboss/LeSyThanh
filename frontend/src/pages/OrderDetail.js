@@ -145,7 +145,7 @@ console.log(this.state.form);
                     <AvForm >
                         <AvField name="OrderID" label="OrderID" type="text" onChange={this.handleChange} value={form?form.OrderID: '' } placeholder = "Chỉ nhập số" required />
                         <AvField name="ProductID" label="ProductID" type="text" onChange={this.handleChange} value={form?form.ProductID: '' } placeholder = "Chỉ nhập số" required />
-                        <AvField name="Quantity" label="Quantity" type="text" onChange={this.handleChange} value={form?form.Quantity: '' } required />
+                        <AvField name="Quantity" label="Quantity" type="text" onChange={this.handleChange} value={form?form.Quantity: '' } placeholder = "Chỉ nhập số" required />
                     </AvForm>
                 </div>
                 </ModalBody>

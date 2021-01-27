@@ -127,6 +127,10 @@ console.log(this.state.form);
 
     <Modal isOpen={this.state.handleinsert}>
                 <ModalHeader style={{display: 'block'}}>
+                {this.state.cc==='insert'?
+                  <span>Nhập thông tin</span>:
+                  <span>Sửa thông tin</span>
+                }
                   <span style={{float: 'right'}} onClick={()=>this.handleinsert()}>x</span>
                 </ModalHeader>
                 <ModalBody>

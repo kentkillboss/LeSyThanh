@@ -1,7 +1,7 @@
 # How to run
 * npm install
 * npm start
-# Sử dụng
+# Use
 * npm i react-axios
 * npm i @fortawesome/react-fontawesome
 * npm i reactstrap

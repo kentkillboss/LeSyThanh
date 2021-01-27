@@ -6,10 +6,10 @@ import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 
-const url="http://192.168.1.234:8080/order/all";
-const urldelete = "http://192.168.1.234:8080/order/delete/";
-const urlupdate = "http://192.168.1.234:8080/order/update/";
-const urladd = "http://192.168.1.234:8080/order/insert";
+const url="http://192.168.1.7:8080/order/all";
+const urldelete = "http://192.168.1.7:8080/order/delete/";
+const urlupdate = "http://192.168.1.7:8080/order/update/";
+const urladd = "http://192.168.1.7:8080/order/insert";
 
 class App extends Component {
 state={
@@ -142,6 +142,10 @@ console.log(this.state.form);
 
     <Modal isOpen={this.state.handleinsert}>
                 <ModalHeader style={{display: 'block'}}>
+                {this.state.cc==='insert'?
+                  <span>Nhập thông tin</span>:
+                  <span>Sửa thông tin</span>
+                }
                   <span style={{float: 'right'}} onClick={()=>this.handleinsert()}>x</span>
                 </ModalHeader>
                 <ModalBody>

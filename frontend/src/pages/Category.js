@@ -6,10 +6,10 @@ import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import {  Button,Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
-const url="http://192.168.1.234:8080/category/all";
-const urldelete = "http://192.168.1.234:8080/category/delete/";
-const urlupdate = "http://192.168.1.234:8080/category/update/";
-const urladd = "http://192.168.1.234:8080/category/insert";
+const url="http://192.168.1.7:8080/category/all";
+const urldelete = "http://192.168.1.7:8080/category/delete/";
+const urlupdate = "http://192.168.1.7:8080/category/update/";
+const urladd = "http://192.168.1.7:8080/category/insert";
 
 class App extends Component {
 state={
